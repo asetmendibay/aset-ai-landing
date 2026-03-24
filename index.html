@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASET AI | Техно-Премиум Лендинг</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        canvas: '#0A0A0A',
+                        surface: '#1A1B20',
+                        divider: '#2A2C35',
+                        brandGreen: '#AAFF00',
+                        brandPink: '#FF2D78',
+                        textPrimary: '#F2F2F2',
+                        textSecondary: '#8A8D98',
+                        whatsapp: '#25D366'
+                    },
+                    fontFamily: {
+                        space: ['"Space Grotesk"', 'sans-serif'],
+                        manrope: ['"Manrope"', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'neon-green': '0 0 20px rgba(170, 255, 0, 0.15)',
+                        'neon-pink': '0 0 20px rgba(255, 45, 120, 0.15)',
+                        'neon-green-inset': 'inset 0 0 20px rgba(170, 255, 0, 0.05)',
+                        'neon-pink-inset': 'inset 0 0 20px rgba(255, 45, 120, 0.05)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        body {
+            background-color: #0A0A0A;
+            color: #F2F2F2;
+            font-family: 'Manrope', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        h1, h2, h3, h4, h5, .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .gradient-text-pink {
+            background: linear-gradient(to right, #FF2D78, #F2F2F2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-canvas text-textPrimary antialiased selection:bg-brandGreen selection:text-canvas">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-canvas/80 backdrop-blur-md border-b border-divider transition-all" x-data="{ mobileMenuOpen: false }">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <a href="#" class="font-space font-bold text-2xl tracking-tight text-textPrimary hover:text-brandGreen transition-colors drop-shadow-[0_0_10px_rgba(170,255,0,0.3)]">
+                        ASET AI<span class="text-brandGreen">.</span>
+                    </a>
+                </div>
+                <!-- Desktop Nav -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#problems" class="text-sm font-medium text-textSecondary hover:text-textPrimary transition-colors">Боли</a>
+                    <a href="#solutions" class="text-sm font-medium text-textSecondary hover:text-textPrimary transition-colors">Решения</a>
+                    <a href="#cases" class="text-sm font-medium text-textSecondary hover:text-textPrimary transition-colors">Кейсы</a>
+                    <a href="#pricing" class="text-sm font-medium text-textSecondary hover:text-textPrimary transition-colors">Тарифы</a>
+                    <a href="#contact" class="px-5 py-2.5 rounded-lg bg-brandPink text-white font-space font-bold tracking-wide hover:bg-brandPink/90 shadow-[0_0_15px_rgba(255,45,120,0.4)] transition-all transform hover:scale-105">
+                        ПОЛУЧИТЬ ДЕМО
+                    </a>
+                </div>
+                <!-- Mobile button -->
+                <div class="md:hidden flex items-center">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="text-textSecondary hover:text-textPrimary focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                            <path x-show="mobileMenuOpen" style="display:none;" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenuOpen" class="md:hidden bg-surface border-b border-divider" style="display:none;">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#problems" @click="mobileMenuOpen = false" class="block px-3 py-2 text-base font-medium text-textSecondary hover:text-textPrimary">Боли</a>
+                <a href="#solutions" @click="mobileMenuOpen = false" class="block px-3 py-2 text-base font-medium text-textSecondary hover:text-textPrimary">Решения</a>
+                <a href="#cases" @click="mobileMenuOpen = false" class="block px-3 py-2 text-base font-medium text-textSecondary hover:text-textPrimary">Кейсы</a>
+                <a href="#pricing" @click="mobileMenuOpen = false" class="block px-3 py-2 text-base font-medium text-textSecondary hover:text-textPrimary">Тарифы</a>
+                <a href="#contact" @click="mobileMenuOpen = false" class="block w-full text-center mt-4 px-5 py-3 rounded-lg bg-brandPink text-white font-space font-bold transition-all">
+                    ПОЛУЧИТЬ ДЕМО
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-brandGreen/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between">
+            <div class="md:w-3/5 text-center md:text-left">
+                <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface border border-divider mb-6">
+                    <span class="w-2 h-2 rounded-full bg-brandGreen animate-pulse"></span>
+                    <span class="text-xs font-space font-bold tracking-widest text-textSecondary uppercase">AI Автоматизация для бизнеса</span>
+                </div>
+                <h1 class="font-space text-4xl sm:text-5xl md:text-6xl lg:text-[64px] font-extrabold leading-[1.1] tracking-tight mb-6 uppercase">
+                    Теряете клиентов <br class="hidden md:block">
+                    пока не отвечаете <br class="hidden md:block">
+                    <span class="text-brandGreen">в WhatsApp?</span>
+                </h1>
+                <p class="text-lg md:text-xl text-textSecondary leading-relaxed mb-8 max-w-2xl mx-auto md:mx-0">
+                    Наш AI начинает диалог за 2 секунды, квалифицирует лидов и закрывает сделки 24/7. Превратите свой WhatsApp в машину продаж.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center gap-4 justify-center md:justify-start">
+                    <a href="#contact" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-brandGreen text-canvas font-space font-bold text-lg tracking-wide hover:bg-[#bbf038] shadow-neon-green transition-all transform hover:-translate-y-1 text-center">
+                        УСТАНОВИТЬ AI-БОТА
+                    </a>
+                </div>
+            </div>
+            
+            <div class="md:w-2/5 mt-16 md:mt-0 w-full">
+                <div class="bg-surface border border-divider rounded-2xl p-6 md:p-8 shadow-2xl relative shadow-neon-green-inset transform transition-transform hover:scale-105">
+                    <div class="absolute -top-4 -right-4 w-24 h-24 bg-brandPink/10 blur-[30px] rounded-full"></div>
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <p class="text-textSecondary text-sm font-medium mb-1">Доставка сообщений</p>
+                            <h3 class="font-space text-5xl font-bold text-textPrimary">99.8%<span class="text-brandGreen text-2xl ml-1">↑</span></h3>
+                        </div>
+                        <div class="p-2 bg-brandGreen/10 rounded-lg flex-shrink-0">
+                            <svg class="w-6 h-6 text-brandGreen" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                        </div>
+                    </div>
+                    <div class="space-y-4 pt-4 border-t border-divider">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-textSecondary">Среднее время ответа</span>
+                            <span class="font-space font-bold text-brandGreen">2.1 сек</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-textSecondary">Конверсия в прогрев</span>
+                            <span class="font-space font-bold">+43%</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-textSecondary">Рабочее время</span>
+                            <span class="font-space font-bold">24/7/365</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pain Points -->
+    <section id="problems" class="py-20 bg-canvas px-4 sm:px-6 lg:px-8 border-t border-divider">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-space text-3xl md:text-5xl font-bold uppercase tracking-tight mb-4">Почему вы <span class="text-brandPink">теряете деньги?</span></h2>
+                <p class="text-textSecondary max-w-2xl mx-auto">Стандартный подход к обработке заявок устарел. Пока ваши менеджеры спят или заняты, клиенты уходят.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <!-- Card 1 -->
+                <div class="bg-surface rounded-2xl p-8 border border-divider hover:border-brandPink/30 shadow-neon-pink-inset transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-canvas flex items-center justify-center border border-divider mb-6">
+                        <svg class="w-6 h-6 text-brandPink" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="font-space text-2xl font-bold mb-3">Потеря лидов</h3>
+                    <p class="text-textSecondary line-clamp-3 leading-relaxed">Клиент пишет ночью или в выходной, не получает ответ в течение 5 минут и уходит к конкурентам. Лид сгорает.</p>
+                </div>
+                <!-- Card 2 -->
+                <div class="bg-surface rounded-2xl p-8 border border-divider hover:border-brandGreen/30 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-canvas flex items-center justify-center border border-divider mb-6">
+                        <svg class="w-6 h-6 text-brandGreen" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                    </div>
+                    <h3 class="font-space text-2xl font-bold mb-3">Дорогой админ</h3>
+                    <p class="text-textSecondary line-clamp-3 leading-relaxed">Менеджер устает, путает скрипты, долго печатает и требует зарплату, налоги и отпуск.</p>
+                </div>
+                <!-- Card 3 -->
+                <div class="bg-surface rounded-2xl p-8 border border-divider hover:border-brandPink/30 transition-all">
+                    <div class="w-12 h-12 rounded-xl bg-canvas flex items-center justify-center border border-divider mb-6">
+                        <svg class="w-6 h-6 text-brandPink" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20.75l3-1.5 3 1.5-.75-3.75 2.5-2.25-3.75-.25L12 11.25l-1.25 3.5-3.75.25.5 2.25zM21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    </div>
+                    <h3 class="font-space text-2xl font-bold mb-3">Конкуренты с AI</h3>
+                    <p class="text-textSecondary line-clamp-3 leading-relaxed">Ваши конкуренты уже внедрили автоответы. Они забирают самых горячих клиентов просто потому, что отвечают первыми.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solutions -->
+    <section id="solutions" class="py-20 bg-canvas px-4 sm:px-6 lg:px-8 border-t border-divider overflow-hidden relative">
+        <div class="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-brandGreen/5 blur-[100px] rounded-full pointer-events-none"></div>
+        <div class="max-w-7xl mx-auto relative z-10">
+            <div class="text-left mb-16 max-w-3xl">
+                <div class="inline-block px-3 py-1 mb-4 rounded bg-surface border border-divider text-xs font-space tracking-widest uppercase text-brandGreen">Экосистема</div>
+                <h2 class="font-space text-3xl md:text-5xl font-bold uppercase tracking-tight mb-4">Наши <span class="text-brandGreen">Решения</span></h2>
+                <p class="text-textSecondary">Мы создаем не просто чат-ботов. Мы строим интеллектуальные системы, которые заменяют отдел продаж.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Sol 1 -->
+                <div class="bg-surface p-8 rounded-3xl border border-divider hover:border-brandGreen/40 shadow-neon-green-inset transition-all group">
+                    <div class="mb-8 flex">
+                        <span class="px-3 py-1 rounded bg-divider text-xs font-space uppercase tracking-widest text-[#F2F2F2]">Модуль 1</span>
+                    </div>
+                    <h3 class="font-space text-2xl font-bold mb-4 group-hover:text-brandGreen transition-colors">Telegram-боты</h3>
+                    <p class="text-textSecondary mb-6">Интеграция с крупнейшим мессенджером. Автоворонки, рассылки по базе без риска бана.</p>
+                </div>
+                <!-- Sol 2 -->
+                <div class="bg-surface p-8 rounded-3xl border border-divider hover:border-brandPink/40 shadow-neon-pink-inset transition-all group">
+                    <div class="mb-8 flex">
+                        <span class="px-3 py-1 rounded bg-divider text-xs font-space uppercase tracking-widest text-[#F2F2F2]">Модуль 2</span>
+                    </div>
+                    <h3 class="font-space text-2xl font-bold mb-4 group-hover:text-brandPink transition-colors">AI-Автоматизация</h3>
+                    <p class="text-textSecondary mb-6">Обучаем нейросеть на вашей базе. AI отвечает на 98% рутинных вопросов как живой человек.</p>
+                </div>
+                <!-- Sol 3 -->
+                <div class="bg-surface p-8 rounded-3xl border border-brandGreen/30 shadow-neon-green-inset transition-all group lg:border-brandGreen">
+                    <div class="mb-8 flex">
+                        <span class="px-3 py-1 rounded bg-brandGreen/20 text-brandGreen border border-brandGreen/30 text-xs font-space uppercase tracking-widest">Эксклюзив</span>
+                    </div>
+                    <h3 class="font-space text-2xl font-bold mb-4 text-brandGreen">Комплексный пакет</h3>
+                    <p class="text-textSecondary mb-6">Связка WhatsApp + Telegram + CRM + AI. Полная оцифровка пути клиента от клика до кассы.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Study -->
+    <section id="cases" class="py-24 bg-surface px-4 sm:px-6 lg:px-8 border-y border-divider relative">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 relative z-10">
+            <div class="md:w-1/2">
+                <div class="inline-block px-3 py-1 mb-6 rounded border border-divider text-xs font-space tracking-widest uppercase text-textSecondary bg-canvas">Кейс из практики</div>
+                <h2 class="font-space text-3xl md:text-5xl font-bold uppercase mb-6 text-textPrimary">Стоматология <br><span class="text-brandPink">Smile Almaty</span></h2>
+                <p class="text-lg text-textSecondary mb-8">Интеграция AI-администратора в WhatsApp клиники позволила разгрузить ресепшн и перестать терять пациентов в нерабочее время.</p>
+                
+                <div class="grid grid-cols-2 gap-6">
+                    <div>
+                        <div class="font-space text-4xl font-extrabold text-brandGreen mb-2">+40%</div>
+                        <div class="text-sm border-t border-divider pt-2 text-textSecondary">Рост конверсии в запись</div>
+                    </div>
+                    <div>
+                        <div class="font-space text-4xl font-extrabold text-brandPink mb-2">2 сек</div>
+                        <div class="text-sm border-t border-divider pt-2 text-textSecondary">Новое время ответа</div>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 relative w-full">
+                <div class="w-full bg-canvas rounded-2xl border border-divider p-6 shadow-xl overflow-hidden relative">
+                    <div class="flex items-center space-x-3 pb-4 border-b border-divider mb-6">
+                        <div class="w-10 h-10 rounded-full bg-brandPink flex items-center justify-center text-canvas font-bold">SA</div>
+                        <div>
+                            <div class="font-space font-bold text-sm text-textPrimary">Smile Almaty AI</div>
+                            <div class="text-xs text-brandGreen">Online</div>
+                        </div>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-end pr-8">
+                            <div class="bg-divider text-textPrimary rounded-t-xl rounded-l-xl p-3 text-sm border border-surface">Сколько стоит чистка зубов?</div>
+                        </div>
+                        <div class="flex">
+                            <div class="bg-surface text-textPrimary border border-divider rounded-t-xl rounded-r-xl p-3 pl-8 text-sm relative">
+                                <span class="absolute left-2 top-2 text-brandGreen">✦</span>
+                                Здравствуйте! Профессиональная чистка зубов стоит 15,000₸. Ближайшее окно завтра в 14:00. Записать вас?
+                            </div>
+                        </div>
+                        <div class="flex justify-end pr-8">
+                            <div class="bg-divider text-textPrimary rounded-t-xl rounded-l-xl p-3 text-sm border border-surface">Да, запишите</div>
+                        </div>
+                        <div class="flex">
+                            <div class="bg-surface text-textPrimary border border-divider rounded-t-xl rounded-r-xl p-3 pl-8 text-sm relative">
+                                <span class="absolute left-2 top-2 text-brandGreen">✦</span>
+                                Отлично! Ждем вас завтра в 14:00 по адресу ул. Абая 150.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="py-24 bg-canvas px-4 sm:px-6 lg:px-8 border-b border-divider relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-space text-3xl md:text-5xl font-bold uppercase tracking-tight mb-4">Выберите <span class="text-brandGreen">Тариф</span></h2>
+                <p class="text-textSecondary max-w-2xl mx-auto">Инвестиция, которая окупается в первый же месяц за счет спасенных лидов.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center max-w-6xl mx-auto">
+                <!-- Tier 1 -->
+                <div class="bg-surface rounded-3xl p-8 border border-divider hover:border-textSecondary transition-all">
+                    <h3 class="font-space text-xl font-bold uppercase mb-2 text-textPrimary">START</h3>
+                    <p class="text-sm text-textSecondary mb-6 border-b border-divider pb-6">Базовая автоматизация</p>
+                    <div class="font-space text-4xl font-extrabold mb-8 text-textPrimary">90,000<span class="text-xl font-medium text-textSecondary">₸</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-sm"><span class="w-1.5 h-1.5 rounded-full bg-textSecondary mr-3"></span>Простой бот-визитка</li>
+                        <li class="flex items-center text-sm"><span class="w-1.5 h-1.5 rounded-full bg-textSecondary mr-3"></span>FAQ (до 10 вопросов)</li>
+                        <li class="flex items-center text-sm text-textSecondary opacity-50"><span class="w-1.5 h-1.5 rounded-full bg-divider mr-3"></span>Без интеграции с CRM</li>
+                    </ul>
+                    <a href="#contact" class="block w-full text-center py-3 rounded-xl border border-divider font-space font-bold hover:bg-divider transition-colors text-textPrimary">ВЫБРАТЬ START</a>
+                </div>
+
+                <!-- Tier 2 - Хит -->
+                <div class="bg-surface rounded-3xl p-8 border-2 border-brandGreen relative shadow-neon-green transform scale-100 lg:scale-105 z-10 transition-transform">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-brandGreen text-canvas px-4 py-1 rounded-full font-space font-bold text-xs uppercase tracking-widest shadow-neon-green">Хит Продаж</div>
+                    <h3 class="font-space text-xl font-bold uppercase mb-2 text-brandGreen">BUSINESS</h3>
+                    <p class="text-sm text-textSecondary mb-6 border-b border-divider pb-6">Полноценный AI-ассистент</p>
+                    <div class="font-space text-4xl sm:text-5xl font-extrabold mb-8 text-textPrimary">200,000<span class="text-xl font-medium text-textSecondary">₸</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-sm"><span class="w-1.5 h-1.5 rounded-full bg-brandGreen mr-3"></span>Умный AI-переговорщик</li>
+                        <li class="flex items-center text-sm"><span class="w-1.5 h-1.5 rounded-full bg-brandGreen mr-3"></span>Интеграция с amoCRM</li>
+                        <li class="flex items-center text-sm"><span class="w-1.5 h-1.5 rounded-full bg-brandGreen mr-3"></span>Сбор контактов лида</li>
+                    </ul>
+                    <a href="#contact" class="block w-full text-center py-4 rounded-xl bg-brandGreen text-canvas font-space font-bold hover:bg-[#bbf038] shadow-neon-green transition-colors">ВЫБРАТЬ BUSINESS</a>
+                </div>
+
+                <!-- Tier 3 -->
+                <div class="bg-surface rounded-3xl p-8 border border-divider hover:border-brandPink/50 transition-all">
+                    <h3 class="font-space text-xl font-bold uppercase mb-2 text-brandPink">PREMIUM</h3>
+                    <p class="text-sm text-textSecondary mb-6 border-b border-divider pb-6">All-inclusive система</p>
+                    <div class="font-space text-4xl font-extrabold mb-8 text-textPrimary">350,000<span class="text-xl font-medium text-textSecondary">₸</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-sm"><span class="w-1.5 h-1.5 rounded-full bg-brandPink mr-3"></span>Всё из Business</li>
+                        <li class="flex items-center text-sm"><span class="w-1.5 h-1.5 rounded-full bg-brandPink mr-3"></span>Омниканальность + IG + TG</li>
+                        <li class="flex items-center text-sm"><span class="w-1.5 h-1.5 rounded-full bg-brandPink mr-3"></span>Персональный менеджер</li>
+                    </ul>
+                    <a href="#contact" class="block w-full text-center py-3 rounded-xl border border-divider hover:border-brandPink font-space font-bold text-textPrimary hover:text-brandPink transition-colors">ВЫБРАТЬ PREMIUM</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Form & Success State -->
+    <section id="contact" class="py-24 bg-surface px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div class="absolute inset-0 bg-brandGreen/5 blur-[150px] opacity-30"></div>
+        <div class="max-w-xl mx-auto relative z-10" x-data="formState()">
+            
+            <!-- Default Form State -->
+            <div x-show="!submitted" x-transition.opacity.duration.500ms class="text-center">
+                <h2 class="font-space text-3xl md:text-5xl font-bold uppercase mb-4 text-textPrimary">НАЧАТЬ <span class="text-brandPink">РАБОТУ</span></h2>
+                <p class="text-textSecondary mb-8 text-lg">Оставьте номер телефона. Мы перезвоним и проведем демонстрацию AI для вашего бизнеса.</p>
+                
+                <form @submit.prevent="submitForm" class="flex flex-col gap-4">
+                    <div class="text-left">
+                        <label class="block text-textSecondary text-sm font-medium mb-2 pl-1">Ваш номер телефона</label>
+                        <input type="tel" required placeholder="+7 (700) 000-00-00"
+                            class="w-full bg-canvas border border-divider text-textPrimary px-4 py-4 rounded-xl focus:outline-none focus:border-brandPink focus:ring-1 focus:ring-brandPink transition-colors font-space text-lg">
+                    </div>
+                    <button type="submit" class="w-full py-4 rounded-xl bg-brandPink text-white font-space font-bold text-lg uppercase tracking-wide hover:bg-[#eb1f68] shadow-neon-pink transition-all transform hover:-translate-y-1">
+                        ПОЛУЧИТЬ ДЕМО
+                    </button>
+                    <p class="text-xs text-textSecondary mt-2">Нажимая кнопку, вы соглашаетесь с условиями обработки данных.</p>
+                </form>
+            </div>
+
+            <!-- Success State -->
+            <div x-cloak x-show="submitted" x-transition.opacity.duration.500ms class="text-center bg-canvas p-10 rounded-3xl border border-brandGreen shadow-neon-green-inset">
+                <div class="w-20 h-20 mx-auto bg-brandGreen/20 rounded-full flex items-center justify-center mb-6 border border-brandGreen/30">
+                    <svg class="w-10 h-10 text-brandGreen" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </div>
+                <h2 class="font-space text-3xl font-bold uppercase mb-4 text-brandGreen">ЗАЯВКА ПРИНЯТА</h2>
+                <p class="text-textSecondary mb-8">Ожидайте звонка. За вами закреплен бонус на первый месяц обслуживания. Бонус сгорит через:</p>
+                
+                <!-- Timer -->
+                <div class="flex justify-center gap-4 text-center">
+                    <div class="bg-surface border border-divider rounded-xl w-20 py-3">
+                        <div class="font-space text-3xl font-bold text-textPrimary" x-text="formatTime(hours)">24</div>
+                        <div class="text-[10px] uppercase tracking-widest text-textSecondary">часов</div>
+                    </div>
+                    <div class="text-3xl font-space font-bold text-divider py-3">:</div>
+                    <div class="bg-surface border border-divider rounded-xl w-20 py-3">
+                        <div class="font-space text-3xl font-bold text-textPrimary" x-text="formatTime(minutes)">00</div>
+                        <div class="text-[10px] uppercase tracking-widest text-textSecondary">минут</div>
+                    </div>
+                    <div class="text-3xl font-space font-bold text-divider py-3">:</div>
+                    <div class="bg-surface border border-divider rounded-xl w-20 py-3">
+                        <div class="font-space text-3xl font-bold text-textPrimary" x-text="formatTime(seconds)">00</div>
+                        <div class="text-[10px] uppercase tracking-widest text-textSecondary">секунд</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-canvas border-t border-divider py-8 text-center px-4">
+        <div class="font-space font-bold text-xl tracking-tight text-textPrimary mb-2">ASET AI<span class="text-brandGreen">.</span></div>
+        <p class="text-sm text-textSecondary">ASET AI © 2026. Все права защищены.</p>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/77000000000" target="_blank" rel="noopener noreferrer" class="fixed right-6 bottom-6 z-50 flex items-center justify-center w-14 h-14 bg-whatsapp rounded-full shadow-[0_4px_14px_0_rgba(37,211,102,0.39)] hover:scale-110 transition-transform">
+        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51a12.8 12.8 0 0 0-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+416:         </svg>
+417:     </a>
+418: 
+419:     <!-- Alpine State Logic -->
+420:     <script>
+421:         document.addEventListener('alpine:init', () => {
+422:             Alpine.data('formState', () => ({
+423:                 submitted: false,
+424:                 timeLeft: 86400, // 24 hours in seconds
+425:                 timer: null,
+426:                 
+427:                 get hours() { return Math.floor(this.timeLeft / 3600); },
+428:                 get minutes() { return Math.floor((this.timeLeft % 3600) / 60); },
+429:                 get seconds() { return this.timeLeft % 60; },
+430:                 
+431:                 formatTime(val) {
+432:                     return val < 10 ? '0' + val : val;
+433:                 },
+434:                 
+435:                 submitForm() {
+436:                     // Start success state manually
+437:                     this.submitted = true;
+438:                     // Start countdown timer
+439:                     this.timer = setInterval(() => {
+440:                         if(this.timeLeft > 0) {
+441:                             this.timeLeft--;
+442:                         } else {
+443:                             clearInterval(this.timer);
+444:                         }
+445:                     }, 1000);
+446:                 }
+447:             }))
+448:         })
+449:     </script>
+450: </body>
+451: </html>
